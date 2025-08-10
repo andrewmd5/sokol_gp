@@ -1647,6 +1647,11 @@ static sg_shader _sgp_make_common_shader(void) {
     desc.image_sampler_pairs[0].stage = SG_SHADERSTAGE_FRAGMENT;
     desc.image_sampler_pairs[0].image_slot = 0;
     desc.image_sampler_pairs[0].sampler_slot = 0;
+    
+    if (backend == SG_BACKEND_WGPU) {
+        desc.images[0].wgsl_group1_binding_n = 64;
+        desc.samplers[0].wgsl_group1_binding_n = 80;
+    }
 
     // GLCORE / GLES3 only
     desc.attrs[SGP_VS_ATTR_COORD].glsl_name = "coord";
